@@ -57,22 +57,19 @@ const deleteProduct = async (req, res) => {
 
 //publish product ==============================
 
-const getPublishedProduct = async (req, res) => {
-    let id = req.params.id;
-  
-    const products = await Product.findAll({ where: { published: true } });
-  
-    res.status(200).send("successfully deleted....");
-  };
+const getPublishedProducts = async (req, res) => {
+//   let id = req.params.id;
 
+  const products = await Product.findAll({ where: { published: true } });
 
+  res.status(200).send(products);
+};
 
-
-module.expoerts = {
+module.exports = {
   addProduct,
   getAllProducts,
   getOneProduct,
   updateProduct,
   deleteProduct,
-  getPublishedProduct
+  getPublishedProducts,
 };

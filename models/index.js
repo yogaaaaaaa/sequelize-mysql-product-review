@@ -27,15 +27,13 @@ sequelize
 const db = {};
 
 db.Sequelize = Sequelize;
-db.Sequelize = sequelize;
+db.sequelize = sequelize;
 
 db.products = require("./productModel.js")(sequelize, DataTypes);
 db.reviews = require("./reviewModel.js")(sequelize, DataTypes);
 
-db.sequelize.sync({force: false})
-.then(()=>
-{
-    console.log('yes re-sync')
-})
+db.sequelize.sync({ force: false }).then(() => {
+  console.log("yes re-sync done!");
+});
 
 module.exports = db;
