@@ -15,16 +15,18 @@ const addProduct = async (req, res) => {
     published: req.body.published ? req.body.published : false,
   };
 
-  const product = await Product.create(info);
+  let product = await Product.create(info);
   res.status(200).send(product);
-  console.log(product);
+  // console.log(product);
 };
 
 //get all products ===========================
 
 const getAllProducts = async (req, res) => {
-  let products = await Product.findAll({});
-  res.status(200).send(products);
+  let allproducts = await Product.findAll({});
+  
+  console.log(allproducts)
+  res.status(200).send(allproducts);
 };
 
 //getOneProduct =============================
@@ -58,9 +60,17 @@ const deleteProduct = async (req, res) => {
 //publish product ==============================
 
 const getPublishedProducts = async (req, res) => {
-//   let id = req.params.id;
 
   const products = await Product.findAll({ where: { published: true } });
+
+  res.status(200).send(products);
+};
+
+//get UN-published products
+
+const getUnpublishedProducts = async (req, res) => {
+
+  let products = await Product.findAll({ where: { published: false } });
 
   res.status(200).send(products);
 };
@@ -72,4 +82,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getPublishedProducts,
+  getUnpublishedProducts,
 };
