@@ -36,4 +36,15 @@ db.sequelize.sync({ force: false }).then(() => {
   console.log("yes re-sync done!");
 });
 
+// 1 to many relationship
+db.products.hasMany(db.reviews, {
+  foreignKey: "product_id",
+  as: "review",
+});
+
+db.reviews.belongsTo(db.products, {
+  foreignKey: "product_id",
+  as: "prodcut",
+});
+
 module.exports = db;

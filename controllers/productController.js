@@ -24,8 +24,8 @@ const addProduct = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
   let allproducts = await Product.findAll({});
-  
-  console.log(allproducts)
+
+  console.log(allproducts);
   res.status(200).send(allproducts);
 };
 
@@ -60,7 +60,6 @@ const deleteProduct = async (req, res) => {
 //publish product ==============================
 
 const getPublishedProducts = async (req, res) => {
-
   const products = await Product.findAll({ where: { published: true } });
 
   res.status(200).send(products);
@@ -69,10 +68,17 @@ const getPublishedProducts = async (req, res) => {
 //get UN-published products
 
 const getUnpublishedProducts = async (req, res) => {
-
   let products = await Product.findAll({ where: { published: false } });
 
   res.status(200).send(products);
+};
+
+//connect one to many product and review
+const getProductReviews = async (req, res) => {
+  let data = await Product.findAll({
+    include: [{ model: Review, as: "review" }],
+    where: { id: 2 },
+  });
 };
 
 module.exports = {
@@ -83,4 +89,5 @@ module.exports = {
   deleteProduct,
   getPublishedProducts,
   getUnpublishedProducts,
+  getProductReviews
 };
