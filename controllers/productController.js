@@ -75,10 +75,14 @@ const getUnpublishedProducts = async (req, res) => {
 
 //connect one to many product and review
 const getProductReviews = async (req, res) => {
+
+  let id = req.params.id;
+
   let data = await Product.findAll({
     include: [{ model: Review, as: "review" }],
-    where: { id: 2 },
+    where: { id: id },
   });
+  res.status(200).send(data);
 };
 
 module.exports = {
@@ -89,5 +93,5 @@ module.exports = {
   deleteProduct,
   getPublishedProducts,
   getUnpublishedProducts,
-  getProductReviews
+  getProductReviews,
 };

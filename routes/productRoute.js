@@ -18,6 +18,6 @@ router.delete("/:id", productController.deleteProduct);
 router.post("/addReview", reviewController.addReview);
 router.get("/allReviews", reviewController.getAllReviews);
 
-router.get("/getProductReviews", productController.getProductReviews);
+router.get("/getProductReviews/:id", productController.getProductReviews);
 
 module.exports = router;
